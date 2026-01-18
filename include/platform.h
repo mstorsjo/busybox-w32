@@ -612,7 +612,11 @@ extern void *memrchr(const void *s, int c, size_t n) FAST_FUNC;
 #endif
 
 #ifndef HAVE_MKDTEMP
-extern char *mkdtemp(char *template) FAST_FUNC;
+extern char *mkdtemp(char *template)
+#ifndef ENABLE_PLATFORM_MINGW32
+FAST_FUNC
+#endif
+;
 #endif
 
 #ifndef HAVE_TTYNAME_R

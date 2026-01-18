@@ -104,7 +104,11 @@ void* FAST_FUNC memrchr(const void *s, int c, size_t n)
 
 #ifndef HAVE_MKDTEMP
 /* This is now actually part of POSIX.1, but was only added in 2008 */
-char* FAST_FUNC mkdtemp(char *template)
+char*
+#ifndef ENABLE_PLATFORM_MINGW32
+FAST_FUNC
+#endif
+mkdtemp(char *template)
 {
 	/* NB: on error, mktemp returns an empty string, not NULL */
 	if (mktemp(template)[0] == '\0' || mkdir(template, 0700) != 0)
